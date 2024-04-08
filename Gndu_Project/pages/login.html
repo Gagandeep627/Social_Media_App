@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../style/login.css">
+
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <div class="main">
+
+        <div class="login-1">
+
+            <div class="login-2">
+
+                <h2>Log In</h2>
+            </div>
+
+            <div class="login-3">
+
+                <div class="email-title">
+
+                    <h4>Email address</h4>
+                </div>
+
+                <input type="email" placeholder="Email Address" class="input" name="email" id="email">
+
+
+            </div>
+
+
+
+
+            <div class="login-3">
+
+                <div class="email-title">
+
+                    <h4>Password</h4>
+                </div>
+
+                <input type="password" placeholder="password" class="input" name="password" id="password">
+
+
+            </div>
+
+
+            <div class="login-4">
+                <button type="button" id="login-4" onclick="Login()">Log in</button>
+            </div>
+
+            <p id="message"></p>
+
+
+            <div class="login-5">
+                <h4 onclick="ForgetPassword()">Forget password</h4>
+            </div>
+
+            <div class="login-6">
+                <p>Dont have an account</p>
+
+                <span id = "signup" onclick="Signup()">Sign up</span>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+    
+
+    <!-- <script src="../js/email.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/login.js"></script> -->
+
+</body>
+
+
+
+<script src="../js/firebase.js"></script>
+<script src="../js/login.js"></script>
+
+</html>

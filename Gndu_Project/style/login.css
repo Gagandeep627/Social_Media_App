@@ -1,0 +1,158 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f3f5;
+}
+
+
+span{
+
+    font-weight: bold;
+}
+
+.login-1{
+
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 4px 12px;
+    width: 410px;
+    padding: 15px;
+    margin-right: 20px;
+    max-width: 410px;
+    min-width: 200px;
+    min-height: 230px;
+
+}
+
+
+.login-2{
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.login-3{
+
+    margin-right: 15px;
+}
+
+
+input{
+
+    outline: none;
+    border: 2px solid #d0d6db;
+    width: 94%;
+    height: 30px;
+    font-weight: 200;
+    border-radius: 5px;
+    padding-left: 10px;
+
+
+
+}
+
+
+input::placeholder{
+    color: #9da6ae;
+}
+
+
+.input{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+
+.login-title{
+
+    margin-bottom: 2px;
+}
+
+.login-4{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+#login-4{
+    margin-top: 15px;
+    width: 97%;
+    border-radius: 5px;
+    background-color: #3360f8;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 35px;
+}
+
+
+.login-5{
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+
+}
+
+
+h4{
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.login-6{
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+
+
+}
+
+/* hunnh methodologyh toh doh : ? 
+ikkh videoh vekh ,
+uhhdah codeh portionh executeh krrh thenh 
+moveh to nxth
+videoh, 
+ikkh videoh compnh krrh kehh, thenh moveh to 
+nxth videoh
+elseh compnh ith firsth.
+
+++moveh to nxth wrkh.
+
+
+
+*/
+
+#signup{
+
+    color: #3360f8;
+    cursor: pointer;
+}
+
+
+
+
