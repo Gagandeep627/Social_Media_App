@@ -31,10 +31,10 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
     firebase
     .firestore()
     .collection("posts")
-    .where("filetype", "==", "video/mp4")
+    .where("fileType", "==", "video/mp4")
     .get()
     .then((onSnapshot) => {
-        console.log(onSnapshot)
+      console.log(onSnapshot.size)
       loading.style.display = "none";
       let allposts = [];
       if (onSnapshot.size === 0) {
@@ -46,10 +46,11 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
         });
         showposts.style.display = "block";
         showposts.innerHTML = "";
+        console.log(allposts.length);
         for (let i = 0; i < allposts.length; i++) {
           let likearry = allposts[i].like;
           let dislikearry = allposts[i].dislike;
-          let commentarry = allposts[i].comment;
+          let commentarry = allposts[i].commentArray;
           let postmain = document.createElement("div");
           showposts.appendChild(postmain);
           postmain.setAttribute("class", "postmain");
@@ -91,7 +92,7 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
               let postdetail = document.createElement("p");
               postheader.appendChild(postdetail);
   
-              postdetail.innerHTML = allposts[i].postvalue; {
+              postdetail.innerHTML = allposts[i].postValue; {
                                 // videos only get video 
                   let postvideo = document.createElement("video");
                   postmain.appendChild(postvideo);
@@ -232,7 +233,7 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
                   firebase
                     .firestore()
                     .collection("users")
-                    .doc(commentarry[commentindex].uid)
+                    .doc(commentarry[commentindex].commentuid)
                     .get()
                     .then((currentuserres) => {
                       commentprofileimage.setAttribute(
@@ -247,8 +248,8 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
                       }
 
                       commentusername.innerHTML = `${
-                        currentuserres.data().firstName
-                      } ${currentuserres.data().lastName}`;
+                        currentuserres.data().FirstName
+                      } ${currentuserres.data().LastName}`;
                     });
                   let commentvalue = document.createElement("p");
                   commentmessage.appendChild(commentvalue);
@@ -274,15 +275,15 @@ firebase.firestore().collection("posts").onSnapshot((onSnapshot)=>{
                 } else {
                   let commentdata = {
                     commentvalue: commentinput.value,
-                    uid: uid,
+                    commentuid: uid,
                   };
-                  commentarry += [commentdata];
+                  commentarry.push(commentdata);  
                   firebase
                     .firestore()
                     .collection("posts")
                     .doc(allposts[i].id)
                     .update({
-                      comment: commentarry,
+                      commentArray: commentarry,
                     });
                 }
               });

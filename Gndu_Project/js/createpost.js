@@ -68,13 +68,13 @@ function createPost(){
   if (postValue !== "" || url !== ""){
     firebase.firestore().collection("posts").add({
 
-        postValue:postValue.textContent,
+        postValue:postValue.value,
         uid: currentuser.uid,
         url:url,
         fileType : fileType,
         like:"",
         dislike:"",
-        comment: "",
+        commentArray: [],
         Date:`${d}`
 
 
@@ -94,25 +94,10 @@ function createPost(){
 
         }, 2000)
          
-      })
-
-
-
-
-
+      
+  })
     })
-
-
-
-
-
-
-
   }
-
-
-
-
 }
 
 

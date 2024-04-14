@@ -61,7 +61,7 @@ firebase
       for (let i = 0; i < allposts.length; i++) {
         let likearry = allposts[i].like;
         let dislikearry = allposts[i].dislike;
-        let commentarry = allposts[i].comment;
+        let commentarry = allposts[i].commentArray;  
         let postmain = document.createElement("div");
         showposts.appendChild(postmain);
         postmain.setAttribute("class", "postmain");
@@ -104,7 +104,7 @@ firebase
 
             let postdetail = document.createElement("p");
             postheader.appendChild(postdetail);
-            postdetail.innerHTML = allposts[i].postvalue;
+            postdetail.innerHTML = allposts[i].postValue;
             postdetail.setAttribute("class", "postdetail");
 
             // console.log(allposts[i])
@@ -260,7 +260,7 @@ firebase
                 firebase
                   .firestore()
                   .collection("users")
-                  .doc((commentarry[commentindex].uid))
+                  .doc((commentarry[commentindex].commentuid))
                   .get()
                   .then((currentuserres) => {
                     commentprofileimage.setAttribute(
@@ -281,6 +281,7 @@ firebase
                 commentmessage.appendChild(commentvalue);
                 commentvalue.setAttribute("class", "comment")
                 commentvalue.innerHTML = commentarry[commentindex].commentvalue;
+                
               }
             }
             let writecomment = document.createElement("div");
@@ -305,16 +306,20 @@ firebase
               } else {
                 let commentdata = {
                   commentvalue: commentinput.value,
-                  uid: uid,
+                  commentuid: uid,
                 };
-                commentarry += [commentdata];
-                firebase
+                commentarry.push(commentdata);       
+                try {
+                  firebase
                   .firestore()
                   .collection("posts")
                   .doc(allposts[i].id)
                   .update({
-                    comments: commentarry,
+                    commentArray: commentarry,
                   });
+                } catch (error) {
+                  console.log(error)
+                }
               }
             });
           });

@@ -373,7 +373,6 @@ firebase
       .where("uid", "==", uid)
       .get()
       .then((onSnapshot) => {
-        console.log(onSnapshot);
         loading.style.display = "none";
         let allposts = [];
         if (onSnapshot.size === 0) {
@@ -386,9 +385,10 @@ firebase
           showposts.style.display = "block";
           showposts.innerHTML = "";
           for (let i = 0; i < allposts.length; i++) {
+            
             let likearry = allposts[i].like;
             let dislikearry = allposts[i].dislike;
-            let commentarry = allposts[i].comment;
+            let commentarry = allposts[i].commentArray;
             let postmain = document.createElement("div");
             showposts.appendChild(postmain);
             postmain.setAttribute("class", "postmain");
@@ -396,6 +396,7 @@ firebase
             let postheader = document.createElement("div");
             postmain.appendChild(postheader);
             postheader.setAttribute("class", "postheader");
+            
             // user data
             firebase
               .firestore()
@@ -423,12 +424,15 @@ firebase
                 username.innerHTML = `${res.data().FirstName} ${
                   res.data().LastName
                 }`;
+                
 
                 let = date = document.createElement("h6");
                 userdiv.appendChild(date);
                 date.innerHTML = `${allposts[i].Date} `;
+
                 let postdetail = document.createElement("p");
                 postheader.appendChild(postdetail);
+                postdetail.innerHTML =`${allposts[i].Date} `;
 
                 var editanddeltebtndiv = document.createElement("div");
                 userprodiv.appendChild(editanddeltebtndiv);
@@ -467,19 +471,22 @@ firebase
                   username.innerHTML = `${res.data().FirstName} ${
                     res.data().LastName
                   }`;
-                  let = date = document.createElement("h6");
+                  let date = document.createElement("h6");
                   userdiv.appendChild(date);
                   date.innerHTML = `${allposts[i].Date} `;
+
+
                   let postdetail = document.createElement("p");
                   postheader.appendChild(postdetail);
                   maincreate.style.display = "block";
-                  textareaupdate.innerHTML = allposts[i].postvalue;
+
+                  postdetail.innerHTML = allposts[i].postValue;
 
                   
                 let updatepostbtn = document.getElementById("updatepostbtn");
                 updatepostbtn.addEventListener("click", () => {
                   var aa = {
-                    postvalue: textareaupdate.value,
+                    postValue: textareaupdate.value,
                     url: updateurl ||"",
                     filetype: fileType||""
                   };
@@ -686,7 +693,7 @@ firebase
                     firebase
                       .firestore()
                       .collection("users")
-                      .doc(commentarry[commentindex].uid)
+                      .doc(commentarry[commentindex].commentuid)
                       .get()
                       .then((currentuserres) => {
                         commentprofileimage.setAttribute(
@@ -700,8 +707,8 @@ firebase
                           );
                         }
                         commentusername.innerHTML = `${
-                          currentuserres.data().firstName
-                        } ${currentuserres.data().lastName}`;
+                          currentuserres.data().FirstName
+                        } ${currentuserres.data().LastName}`;
                       });
                     let commentvalue = document.createElement("p");
                     commentmessage.appendChild(commentvalue);
@@ -728,16 +735,20 @@ firebase
                   } else {
                     let commentdata = {
                       commentvalue: commentinput.value,
-                      uid: uid
+                      commentuid: uid
                     };
                     commentarry.push(commentdata);
-                    firebase
+                    try {
+                      firebase
                       .firestore()
                       .collection("posts")
                       .doc(allposts[i].id)
                       .update({
-                        comments: commentarry
+                        commentArray: commentarry,
                       });
+                    } catch (error) {
+                      console.log(error)
+                    }
                   }
                 });
               });
