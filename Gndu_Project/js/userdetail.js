@@ -248,7 +248,7 @@ firebase.auth().onAuthStateChanged((user) => {
         .onSnapshot((result) => {
           result.forEach((users) => {
             alluser.push(users.data());
-            fileType = users.data().filetype;
+            fileType = users.data().fileType;
             if (users.data().uid === user.uid) {
               createpostinput.setAttribute(
                 "placeholder",
@@ -274,7 +274,7 @@ firebase.auth().onAuthStateChanged((user) => {
         .onSnapshot((result) => {
           result.forEach((users) => {
             alluser.push(users.data());
-            Filetype = users.data().filetype;
+            Filetype = users.data().fileType;
             if (users.data().uid === user.uid) {
               if (
                 users.data().ProfilePicture !== "" ||
@@ -431,8 +431,15 @@ firebase
                 date.innerHTML = `${allposts[i].Date} `;
 
                 let postdetail = document.createElement("p");
+                postdetail.setAttribute("class", "gagan");
                 postheader.appendChild(postdetail);
-                postdetail.innerHTML =`${allposts[i].Date} `;
+                // console.log(`${allposts[i].postValue}`);
+                postdetail.innerHTML =`${allposts[i].postValue} `;
+
+                
+
+                // console.log(allposts[i].postValue);
+                // postdetail.innerHTML = allposts[i].postValue;
 
                 var editanddeltebtndiv = document.createElement("div");
                 userprodiv.appendChild(editanddeltebtndiv);
@@ -476,19 +483,21 @@ firebase
                   date.innerHTML = `${allposts[i].Date} `;
 
 
-                  let postdetail = document.createElement("p");
-                  postheader.appendChild(postdetail);
-                  maincreate.style.display = "block";
+                // let postdetail = document.createElement("p");
+                // postheader.appendChild(postdetail);
+                // maincreate.style.display = "block";
 
-                  postdetail.innerHTML = allposts[i].postValue;
-
+                // console.log(allposts[i].postValue);
+                // postdetail.innerHTML = allposts[i].postValue;
+                  
+                // });
                   
                 let updatepostbtn = document.getElementById("updatepostbtn");
                 updatepostbtn.addEventListener("click", () => {
                   var aa = {
                     postValue: textareaupdate.value,
                     url: updateurl ||"",
-                    filetype: fileType||""
+                    fileType: fileType||""
                   };
                   firebase
                     .firestore()
@@ -533,12 +542,13 @@ firebase
                   // });
                 });
 
-                postdetail.innerHTML = allposts[i].postvalue;
+                postdetail.innerHTML = allposts[i].postValue;
+                // console.log(allposts[i].fileType);
                 if (allposts[i].url !== "") {
                   if (
-                    allposts[i].filetype === "image/png" ||
-                    allposts[i].filetype === "image/jpeg" ||
-                    allposts[i].filetype === "image/jpg"
+                    allposts[i].fileType === "image/png" ||
+                    allposts[i].fileType === "image/jpeg" ||
+                    allposts[i].fileType === "image/jpg"
                   ) {
                     // images
                     let postimage = document.createElement("img");
@@ -647,14 +657,14 @@ firebase
                     }
                   }
                   if (!dislike) {
-                    dislikearry.push(uid);
+                    dislikearry = [uid];
                   }
                   firebase
                     .firestore()
                     .collection("posts/")
                     .doc(allposts[i].id)
                     .update({
-                      dislikes: dislikearry
+                      dislike: dislikearry
                     });
                 });
 

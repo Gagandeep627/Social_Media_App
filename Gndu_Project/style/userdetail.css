@@ -179,7 +179,7 @@
   }
   #showposts {
     height: auto;
-    max-height: 18vh;
+    max-height: 80vh;
     width: 100% !important;
     overflow: auto;
   }
